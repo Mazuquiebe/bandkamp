@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("SECRET_KEY",get_random_secret_key())
 DEBUG = os.getenv("DEBUG", False)
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://bandkamp-api-mc0o.onrender.com", "0.0.0.0"]
 
 
 RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
