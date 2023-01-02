@@ -19,12 +19,12 @@ class SongView(generics.ListCreateAPIView):
     
 
     def perform_create(self, serializer):
-        album_id = self.kwargs.get('pk')
+        album_id = self.kwargs['pk']
         serializer.save(album_id=album_id)
 
 
     def get_queryset(self):
-        album_id = self.kwargs.get['pk']
+        album_id = self.kwargs['pk']
         return self.queryset.filter(album_id=album_id)
 
 # class SongView(APIView, PageNumberPagination):

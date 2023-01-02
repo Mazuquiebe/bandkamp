@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import User
+import ipdb
+
 
 class UserSerializer(serializers.ModelSerializer):
     
@@ -17,7 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
             "is_superuser",
         ]
         read_only_fields  = ["id",]
-        write_only_fields = ["password",]
     
         extra_kwargs = { 
             "username": {
@@ -28,18 +29,32 @@ class UserSerializer(serializers.ModelSerializer):
                     )
                 ]
             },
+            "email":{
+                "validators": [
+                    UniqueValidator(
+                        queryset = User.objects.all(), 
+                        message="This field must be unique."
+                    )
+                ]
+            },
+            "password":{"write_only": True},
         }
         
-        def create(self, validated_data: dict) -> User:
-            return User.objects.create_superuser(**validated_data)
+    def create(self, validated_data: dict) -> User:
+        return User.objects.create_superuser(**validated_data)
+            
     
-        def update(self, instance: User, validated_data: dict) -> User:
-            for key, value in validated_data.items():
-                setattr(instance, key, value)
-    
-            instance.save()
-    
-            return instance
+    def update(self, instance: User, validated_data: dict) -> User:
+        for key, value in validated_data.items():
+            
+            if key == "password":
+                instance.set_password(value)
+                
+            setattr(instance, key, value)
+
+        instance.save()
+
+        return instance
     
 # class UserSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)

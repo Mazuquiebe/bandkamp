@@ -18,8 +18,8 @@ class SongSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "album_id",]
     
     
-        def create(self, validated_data):
-            return Song.objects.create(**validated_data)
+    def create(self, validated_data):
+        return Song.objects.create(**validated_data)
 
 # class SongSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)

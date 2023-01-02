@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: BandCamp
   version: 1.0.0
-  description: BandCamp API is a project where musicians can register albuns and songs
+  description: BandKamp API is a project where musicians can register albuns and songs
 paths:
   /api/albums/:
     get:
@@ -331,17 +331,14 @@ components:
           readOnly: true
         username:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
-            only.
-          maxLength: 150
+          maxLength: 127
         email:
           type: string
-          format: email
-          title: Email address
-          maxLength: 254
+          maxLength: 127
         password:
           type: string
-          maxLength: 128
+          writeOnly: true
+          maxLength: 127
         first_name:
           type: string
           maxLength: 50
@@ -401,17 +398,14 @@ components:
           readOnly: true
         username:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
-            only.
-          maxLength: 150
+          maxLength: 127
         email:
           type: string
-          format: email
-          title: Email address
-          maxLength: 254
+          maxLength: 127
         password:
           type: string
-          maxLength: 128
+          writeOnly: true
+          maxLength: 127
         first_name:
           type: string
           maxLength: 50
@@ -424,6 +418,7 @@ components:
           description: Designates that this user has all permissions without explicitly
             assigning them.
       required:
+      - email
       - first_name
       - id
       - last_name

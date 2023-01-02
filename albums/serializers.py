@@ -20,8 +20,8 @@ class AlbumSerializer(serializers.ModelSerializer):
         ]
     
     
-        def create(self, validated_data):
-            return Album.objects.create(**validated_data)
+    def create(self, validated_data):
+        return Album.objects.create(**validated_data)
 
 # class AlbumSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
